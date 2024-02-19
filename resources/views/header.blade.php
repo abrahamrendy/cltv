@@ -40,12 +40,26 @@
     <link href="{{asset('css/vendors/base/vendors.bundle.css')}}" rel="stylesheet" type="text/css" />
     
     <!-- <link href="../../../assets/demo/default/base/style.bundle.css" rel="stylesheet" type="text/css" /> -->
-    <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('css/default/base/style.bundle.css')}}" rel="stylesheet" type="text/css" />
+    <!-- <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" /> -->
+    <!-- <link href="{{asset('css/default/base/style.bundle.css')}}" rel="stylesheet" type="text/css" /> -->
     <!--end::Base Styles -->
-    <!-- <link rel="shortcut icon" href="../../../assets/demo/default/media/img/logo/favicon.ico" /> -->
-    <!-- Styles -->
-    <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
+
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="{{asset('vendors/mdi/css/materialdesignicons.min.css')}}">
+    <link rel="stylesheet" href="{{asset('vendors/css/vendor.bundle.base.css')}}">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="{{asset('vendors/jvectormap/jquery-jvectormap.css')}}">
+    <link rel="stylesheet" href="{{asset('vendors/flag-icon-css/css/flag-icon.min.css')}}">
+    <link rel="stylesheet" href="{{asset('vendors/owl-carousel-2/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="{{asset('vendors/owl-carousel-2/owl.theme.default.min.css')}}">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="{{asset('images/favicon.png')}}" />
 
 
     <style type="text/css">
@@ -193,7 +207,7 @@
     </div>
 
 
-    <div>
+    <!-- <div>
         <div class="col-sm-10 pt-4">
             <?php 
                 if (session('currUser')) {
@@ -205,5 +219,5 @@
                     <a class="float-right btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air" style="font-weight: 400" href="#" data-toggle="modal" data-target="#login-modal">LOGIN</a>
             <?php } ?>
         </div>
-    </div>
+    </div> -->
 </body>
