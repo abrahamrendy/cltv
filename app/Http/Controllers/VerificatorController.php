@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use DNS2D;
 use Storage;
 
-class IndexController extends Controller
+class VerificatorController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -16,7 +16,7 @@ class IndexController extends Controller
      */
     public function __construct()
     {
-
+        $this->middleware('auth');
     }
 
     /**
@@ -26,19 +26,7 @@ class IndexController extends Controller
      */
     public function index()
     {
-        // $ibadah_asal = DB::table('ibadah_asal')->get();
-        // $ibadah = DB::table('ibadah')->get();
-        // $ibadah = DB::select('SELECT id, nama, qty, IFNULL(t.ct, 0) as ct FROM ibadah LEFT OUTER JOIN (SELECT ibadah, count(id) as ct FROM `registrant` GROUP BY ibadah) as t ON ibadah.id = t.ibadah WHERE ibadah.status = 1 ORDER BY nama');
-        return view('index');
-    }
-
-    public function tracker()
-    {
-        if (session('currUser')) {
-            return redirect('tracker/dashboard');
-        } else {
-            return view('tracker-login');
-        }
+        return view('verificator');
     }
 
     public function submit(Request $request) {
@@ -105,51 +93,5 @@ class IndexController extends Controller
             }
 
         }
-    }
-
-    public function registEmail ($to, $ibadah, $id, $code,$name) {
-        $subject = 'GBI Sukawarna Christmas Celebration Service Confirmation';
-        $htmlBody = '<table width=700px style="background-color:#07121E; padding:40px 40px">';
-        $htmlBody .= '<tr>
-                        <td> 
-                            <table width=100% style="background-color: #1d252f; padding:20px 20px;font-family: sans-serif;color: #fff !important"> 
-                                <tr>
-                                    <td>
-                                        <br>
-                                        <tr> 
-                                            <td> 
-                                                <div style="display: inline-block;width: 100%; text-align: center"> 
-                                                    <img src="https://i.imgur.com/eb3pyoN.png" width="50%"> 
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr> 
-                                            <td align="center"> 
-                                                <br><br><p> 
-                                                <h1 style="word-break: break-word;color: #fff !important">No.urut: '.$id.'</h1> 
-                                                <h1 style="word-break: break-word;color: #fff !important">Terima Kasih, '.$name.'</h1>
-                                                <h3 style="word-break: break-word; font-weight: normal;color: #fff !important">Anda telah terdaftar untuk mengikuti ibadah natal GBI Sukawarna.</h3>
-                                                <h1 style="word-break: break-word;color: #fff !important">'.$ibadah->nama.'</h1>
-                                                <h3 style="word-break: break-word; font-weight: normal; font-style: italic;color: #fff !important">Informasi: +'.$ibadah->contact_person.'</h3> 
-                                                <hr>
-                                                <img src="'.asset("img/qrcodes/".$code.".jpg").'"></img>
-                                                <h3 style="word-break: break-word; font-weight: normal;color: #fff !important">Mohon membawa QR-Code ini saat daftar ulang sehingga tim kami dapat mengkonfirmasi kehadiran anda.</h3> 
-                                                </p>
-                                            </td>
-                                        </tr>
-                                        <tr> 
-                                            <td align="center"> 
-                                                <hr> <br>
-                                                <p style="font-weight: bold"> <i>Tuhan Yesus Memberkati.</i></p><br>
-                                            </td>
-                                        </tr>
-                                    <tr><td><br>';
-
-        // Headers
-        $headers[] = 'MIME-Version: 1.0';
-        $headers[] = 'Content-type: text/html; charset=iso-8859-1';
-        $headers[] = 'From: GBI Sukawarna <gbisukawarna@gbisukawarna.org>';
-        //End of send email//
-        return mail($to, $subject, $htmlBody, implode("\r\n", $headers));
     }
 }

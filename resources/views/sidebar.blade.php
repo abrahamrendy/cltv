@@ -1,7 +1,7 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
   <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-    <a class="sidebar-brand brand-logo" href="index.html"><img src="assets/images/logo.svg" alt="logo" /></a>
-    <a class="sidebar-brand brand-logo-mini" href="index.html"><img src="assets/images/logo-mini.svg" alt="logo" /></a>
+    <a class="sidebar-brand brand-logo" href="{{route('tracker')}}"><img src="assets/images/logo.svg" alt="logo" /></a>
+    <a class="sidebar-brand brand-logo-mini" href="{{route('tracker')}}"><img src="assets/images/logo-mini.svg" alt="logo" /></a>
   </div>
   <ul class="nav">
     <li class="nav-item profile">
@@ -12,7 +12,7 @@
             <span class="count bg-success"></span>
           </div> -->
           <div class="profile-name">
-            <h5 class="mb-0 font-weight-normal">Henry Klein</h5>
+            <h5 class="mb-0 font-weight-normal">{{$currUser->name}}</h5>
             <!-- <span>Gold Member</span> -->
           </div>
         </div>
@@ -22,14 +22,14 @@
       <span class="nav-link">Navigation</span>
     </li>
     <li class="nav-item menu-items">
-      <a class="nav-link" href="index.html">
+      <a class="nav-link" href="{{route('tracker')}}">
         <span class="menu-icon">
           <i class="mdi mdi-speedometer"></i>
         </span>
         <span class="menu-title">Dashboard</span>
       </a>
     </li>
-    <li class="nav-item menu-items">
+    <!-- <li class="nav-item menu-items">
       <a class="nav-link" href="#">
         <span class="menu-icon">
           <i class="mdi mdi-gamepad-variant"></i>
@@ -52,7 +52,7 @@
           <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
         </ul>
       </div>
-    </li>
+    </li> -->
   </ul>
 </nav>
 <!-- partial -->
@@ -71,7 +71,7 @@
           <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
             <div class="navbar-profile">
               <!-- <img class="img-xs rounded-circle" src="assets/images/faces/face15.jpg" alt=""> -->
-              <p class="mb-0 d-none d-sm-block navbar-profile-name">Henry Klein</p>
+              <p class="mb-0 d-none d-sm-block navbar-profile-name">{{$currUser->name}}</p>
               <i class="mdi mdi-menu-down d-none d-sm-block"></i>
             </div>
           </a>
@@ -89,7 +89,7 @@
               </div>
             </a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item preview-item">
+            <a class="dropdown-item preview-item" href="{{route('logout_user')}}">
               <div class="preview-thumbnail">
                 <div class="preview-icon bg-dark rounded-circle">
                   <i class="mdi mdi-logout text-danger"></i>

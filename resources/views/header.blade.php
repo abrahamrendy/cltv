@@ -61,7 +61,6 @@
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{{asset('images/favicon.png')}}" />
 
-
     <style type="text/css">
         body, .form-control {
             font-family: "Barlow", Times, serif !important;
@@ -169,55 +168,3 @@
         }
     </style>
 </head>
-<body>
-    <!-- Modal -->
-    <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Login</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-            <form class="m-login__form m-form" action="{{ route('login_user') }}" method="POST">
-                <div class="modal-body">
-                    @csrf
-
-                    <input type="hidden" name="existed_id">
-
-                    <div class="form-group">
-                        <input class="form-control" type="email" placeholder="Email" name="email" required>
-                    </div>
-
-                    <div class="form-group">
-                        <input class="form-control" type="password" placeholder="Tanggal Lahir (DD-MM-YYYY)" name="password" required>
-                        <span class="m-form__help">
-                            * CONTOH: 06-10-1994
-                        </span>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </form>
-        </div>
-      </div>
-    </div>
-
-
-    <!-- <div>
-        <div class="col-sm-10 pt-4">
-            <?php 
-                if (session('currUser')) {
-                    $currUser = session('currUser');
-            ?>
-                    <a href="{{ route ('user')}}" class = "float-right btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air" style="font-weight: 400" href="#">Hi, {{ $currUser->nama }}!</a>
-                    <a href="{{ route ('index')}}" class = "float-right btn btn-primary m-btn m-btn--pill m-btn--custom m-btn--air" style="font-weight: 400; margin-right: 10px;" href="#">HOME</a>
-            <?php } else { ?>
-                    <a class="float-right btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air" style="font-weight: 400" href="#" data-toggle="modal" data-target="#login-modal">LOGIN</a>
-            <?php } ?>
-        </div>
-    </div> -->
-</body>

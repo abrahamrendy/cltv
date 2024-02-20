@@ -1,6 +1,6 @@
     <!-- partial:partials/_footer.html -->
           <footer class="footer">
-            <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <div class="d-sm-flex justify-content-center">
               <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © Cultivate Hub {{ date('Y') }}</span>
             </div>
           </footer>
@@ -22,7 +22,7 @@
         <!--end::Base Scripts -->
 
         <!-- plugins:js -->
-        <script src="assets/vendors/js/vendor.bundle.base.js')}}"></script>
+        <!-- <script src="assets/vendors/js/vendor.bundle.base.js')}}"></script> -->
         <!-- endinject -->
         <!-- Plugin js for this page -->
         <script src="{{asset('vendors/chart.js/Chart.min.js')}}"></script>

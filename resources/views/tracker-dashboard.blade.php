@@ -1,4 +1,5 @@
         @include('header')
+    <body>
     <style type="text/css">
         .stretch-card {
             height: 500px;
@@ -18,7 +19,7 @@
           outline: 1px solid #666B7A;
         }
     </style> 
-    <body>
+    
     <div class="container-scroller">
       <!-- partial:partials/_sidebar.html -->
         @include('sidebar')
@@ -37,10 +38,10 @@
                     <div class="bg-gray-dark d-flex d-md-block d-xl-flex flex-row py-3 px-4 px-md-3 px-xl-4 rounded mt-3">
                       <div class="text-md-center text-xl-left">
                         <h6 class="mb-1">Batch</h6>
-                        <p class="text-muted mb-0">29 Feb 2024 - 15 Aug 2024</p>
+                        <p class="text-muted mb-0">{{$materials[0]->c_date}}</p>
                       </div>
                       <div class="align-self-center flex-grow text-right text-md-center text-xl-right py-md-2 py-xl-0">
-                        <h6 class="font-weight-bold mb-0">#1</h6>
+                        <h6 class="font-weight-bold mb-0">#{{$materials[0]->c_batch}}</h6>
                       </div>
                     </div>
                   </div>
@@ -62,60 +63,36 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td> 1 </div>
-                            </td>
-                            <td> Abc </td>
-                            <td> 04 Dec 2019 </td>
-                            <td>
-                              <div class="badge badge-outline-success" style="width: 85px">Attended</div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td> 2 </div>
-                            </td>
-                            <td> Study Case of Henry Klein </td>
-                            <td> 04 Dec 2019 </td>
-                            <td>
-                              <div class="badge badge-outline-warning" style="width: 85px">Unattended</div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td> 3 </div>
-                            </td>
-                            <td> Henry Klein </td>
-                            <td> 04 Dec 2019 </td>
-                            <td>
-                              <div class="badge badge-outline-success" style="width: 85px">Attended</div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td> 1 </div>
-                            </td>
-                            <td> Abc </td>
-                            <td> 04 Dec 2019 </td>
-                            <td>
-                              <div class="badge badge-outline-success">Attended</div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td> 2 </div>
-                            </td>
-                            <td> Study Case of Henry Klein </td>
-                            <td> 04 Dec 2019 </td>
-                            <td>
-                              <div class="badge badge-outline-success">Attended</div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td> 3 </div>
-                            </td>
-                            <td> Henry Klein </td>
-                            <td> 04 Dec 2019 </td>
-                            <td>
-                              <div class="badge badge-outline-success">Attended</div>
-                            </td>
-                          </tr>
+                            <?php
+                                $ct = 1;
+                                $attended = 0;
+                                $unattended = 0;
+                                foreach ($materials as $material) {
+                            ?>
+                                    <tr>
+                                        <td> {{$ct}} </td>
+                                        <td> {{$material->m_name}} </td>
+                                        <td> {{date("d M Y", strtotime ($material->cm_date))}} </td>
+                                        <td>
+                                            <?php
+                                                if (in_array($material->cm_id, $attendance)) {
+                                                    $attended++;
+                                            ?>
+                                                    <div class="badge badge-outline-success" style="width: 85px">Attended</div>
+                                            <?php
+                                                } else {
+                                                    $unattended++;
+                                            ?>
+                                                    <div class="badge badge-outline-warning" style="width: 85px">Unattended</div>
+                                            <?php
+                                                }
+                                            ?>
+                                        </td>
+                                    </tr>
+                            <?php 
+                                    $ct++; 
+                                } 
+                            ?>
                         </tbody>
                       </table>
                     </div>
@@ -188,6 +165,79 @@
           </div>
           <!-- content-wrapper ends -->
     @include('footer')
+
+    <script>
+        if ($("#transaction-history").length) {
+          var areaData = {
+            labels: ["Attended", "Unattended"],
+            datasets: [{
+                data: [{{$attended}}, {{$unattended}}],
+                backgroundColor: [
+                  "#00d25b","#ffab00"
+                ]
+              }
+            ]
+          };
+          var areaOptions = {
+            responsive: true,
+            maintainAspectRatio: true,
+            segmentShowStroke: false,
+            cutoutPercentage: 70,
+            elements: {
+              arc: {
+                  borderWidth: 0
+              }
+            },      
+            legend: {
+              display: false
+            },
+            tooltips: {
+              enabled: true
+            }
+          }
+          var transactionhistoryChartPlugins = {
+            beforeDraw: function(chart) {
+              var width = chart.chart.width,
+                  height = chart.chart.height,
+                  ctx = chart.chart.ctx;
+          
+              ctx.restore();
+              var fontSize = 1;
+              ctx.font = fontSize + "rem sans-serif";
+              ctx.textAlign = 'left';
+              ctx.textBaseline = "middle";
+              ctx.fillStyle = "#ffffff";
+          
+              // var text = "13", 
+              //     textX = Math.round((width - ctx.measureText(text).width) / 2),
+              //     textY = height / 2.4;
+          
+              // ctx.fillText(text, textX, textY);
+
+              // ctx.restore();
+              // var fontSize = 0.75;
+              // ctx.font = fontSize + "rem sans-serif";
+              // ctx.textAlign = 'left';
+              // ctx.textBaseline = "middle";
+              // ctx.fillStyle = "#6c7293";
+
+              // var texts = "Total", 
+              //     textsX = Math.round((width - ctx.measureText(text).width) / 1.93),
+              //     textsY = height / 1.7;
+          
+              // ctx.fillText(texts, textsX, textsY);
+              ctx.save();
+            }
+          }
+          var transactionhistoryChartCanvas = $("#transaction-history").get(0).getContext("2d");
+          var transactionhistoryChart = new Chart(transactionhistoryChartCanvas, {
+            type: 'doughnut',
+            data: areaData,
+            options: areaOptions,
+            plugins: transactionhistoryChartPlugins
+          });
+        }
+    </script>
   </body>
 </html>
             
