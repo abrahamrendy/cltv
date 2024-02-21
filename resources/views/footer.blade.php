@@ -43,7 +43,7 @@
         <!-- End custom js for this page -->
         <!--begin::Page Snippets -->
         <!-- <script src="{{asset('app/js/dashboard.js')}}" type="text/javascript"></script> -->
-        <script src="{{asset('js/custom.js')}}" type="text/javascript"></script>
+        <!-- <script src="{{asset('js/custom.js')}}" type="text/javascript"></script> -->
         <!--end::Page Snippets -->
     </body>
     <!-- end::Body -->

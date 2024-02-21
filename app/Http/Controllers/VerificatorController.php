@@ -29,69 +29,43 @@ class VerificatorController extends Controller
         return view('verificator');
     }
 
-    public function submit(Request $request) {
-        $kaj = $request->input('kaj');
-        $nama = $request->input('nama');
-        $email = strtolower($request->input('email'));
-        $phone = $request->input('phone');
-        $dob = date('Y-m-d', strtotime($request->input('dob')));
-        $m_class = $request->input('mclass');
-        $ibadah_asal = $request->input('ibadah_asal');
-        $ibadah = $request->input('ibadah');
-        $created_at = date('Y-m-d H:i:s', strtotime('now + 7 hours'));
+    public function scan (Request $request) {
+        $active_service = DB::table('classes')->where('active',1)->first();
+        $qr_code = strip_tags($request->input('qr_code'));
+        $create_date = date('Y-m-d H:i:s' , strtotime('now + 7 hours'));
 
-        $getService = DB::table('ibadah')->where('id', $ibadah)->first();
+        $isExist = DB::table('registrant')->where('qr_code',$qr_code)->first();
 
-        $countUser = DB::table('registrant')->where('ibadah',$ibadah)->count();
-
-        $existedUser = DB::table('registrant')->join('ibadah', 'registrant.ibadah', '=', 'ibadah.id')->where('registrant.nama', $nama)->where('registrant.dob', $dob)->select('registrant.id as registrant_id', 'registrant.nama as registrant_name', 'registrant.qr_code as qr_code', 'ibadah.*')->first();
-
-        if (!empty($existedUser)) {
-            return view('fail', ['code' => 0, 'user' => $existedUser]);
+        if($isExist) {
+            $isClassMember = DB::table('registrant_classes')->where('registrant_id',$isExist->id)->where('classes_id', $active_service->id)->first();
+        } else {
+            \Session::flash('fail', 'QR Code unregistered!');
+            return back();
         }
 
-        if ($countUser >= ($getService->qty)) {
-            // USER EXCEEDED CAPACITY
-            return view('fail', ['code' => 1, 'data' => $getService]);
-        } else {
-            $id = DB::table('registrant')->insertGetId(
-                                                ['kaj' => $kaj,
-                                                 'nama' => $nama,
-                                                 'email' => $email,
-                                                 'phone' => $phone,
-                                                 'dob' => $dob,
-                                                 'm-class' => $m_class,
-                                                 'ibadah_asal' => $ibadah_asal,
-                                                 'ibadah' => $ibadah,
-                                                 'created_at' => $created_at,
-                                                ] );
-            if ($id) {
-
-                if ($kaj != '') {
-                    $combine = $kaj;
+        if ($isClassMember) {
+            $getActiveClassesMaterials = DB::table('classes_materials')->where('active_now',1)->first();
+            $isAttend = DB::table('attendances')->where('classes_materials_id',$getActiveClassesMaterials->id)->where('participants_id', $isClassMember->registrant_id)->first();
+            if (!$isAttend) {
+                $id = DB::table('attendances')->insertGetId(
+                                                        ['participants_id' => $isClassMember->registrant_id,
+                                                         'classes_materials_id' => $getActiveClassesMaterials->id,
+                                                         'created_at' => $create_date
+                                                        ] );
+                if ($id) {
+                    \Session::flash('success', $isExist->name.' verified!');
+                    return back();
                 } else {
-                    $ibadahAsal = DB::table('ibadah_asal')->where('id', $ibadah_asal)->first();
-                    $counterUp = $ibadahAsal->counter + 1;
-                    $combine = date('Y', strtotime('now + 7 hours')).$ibadah_asal.$counterUp;
-                    DB::table('ibadah_asal')->where('id',$ibadah_asal)->update(
-                                                                        [
-                                                                         'counter' => $counterUp
-                                                                        ] );
+                    \Session::flash('fail', $isExist->name.' not verified! Please try again!');
+                    return back();
                 }
-                
-                DB::table('registrant')->where('id',$id)->update(
-                                                                        [
-                                                                         'qr_code' => $combine
-                                                                        ] );
-                Storage::disk('public')->put('qrcodes/'.$combine.'.jpg',base64_decode(DNS2D::getBarcodePNG($combine, "QRCODE", 10,10)));
-                // SET UP EMAIL
-                $this->registEmail($email, $getService, $id, $combine,$nama);
-                return view('success', ['data' => $getService, 'id' => $id, 'name' => $nama, 'code' => $combine]);
             } else {
-                // GENERIC ERROR MESSAGE
-                return view('fail', ['code' => 0, 'data' => $getService]);
+                \Session::flash('success', $isExist->name .  ' has been verified at ' . $isAttend->created_at);
+                return back();
             }
-
+        } else {
+            \Session::flash('fail', 'QR Code unregistered for this class!');
+            return back();
         }
     }
 }

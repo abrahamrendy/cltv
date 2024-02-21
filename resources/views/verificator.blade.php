@@ -1,6 +1,6 @@
         @include('header')
 
-    <body class="m--skin- m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default"  >
+    <body class="m--skin- m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default"  style="background-color: #004C2E;">
         <!-- begin:: Page -->
         <style type="text/css">
             .left-side-bg {
@@ -58,72 +58,6 @@
                 content: "";
               }
         </style>
-        <div class="m-grid m-grid--hor m-grid--root m-page">
-            <div class="m-login m-login--singin  m-login--5" id="m_login" >
-                <div class="m-login__wrapper-2 m-portlet-full-height">
-                    <div class="m-login__contanier">
-                        <div class="m-login__signin">
-                            <div class="m-login__head">
-                                <h3 class="m-login__title">
-                                    <b>PERTEMUAN PENGERJA <br><?php echo date('d/m Y', strtotime('now'))?></b><br>ACTIVATOR
-                                </h3>
-                                <h4 class="text-center">
-                                </h4>
-                                <h4 class="text-center">
-                                </h4>
-                            </div>
-                            @if($message = Session::get('success'))
-                                <div class="alert alert-success alert-dismissible" role="alert" style="margin-top: 2rem; margin-bottom: -2rem; font-size: 1.5rem">
-                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                  </button>
-                                  <strong>Success!</strong> <?php echo $message;?>
-                                </div>
-                            @endif
-                            @if($message = Session::get('double'))
-                                <div class="alert alert-warning alert-dismissible" role="alert" style="margin-top: 2rem; margin-bottom: -2rem; font-size: 1.5rem">
-                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                  </button>
-                                  <strong>Success!</strong> <?php echo $message;?>
-                                </div>
-                            @endif
-                            @if($message = Session::get('fail'))
-                                <div class="alert alert-danger alert-dismissible" role="alert" style="margin-top: 2rem; margin-bottom: -2rem; font-size: 1.5rem">
-                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                  </button>
-                                  <strong>Fail!</strong> <?php echo $message;?>
-                                </div>
-                            @endif
-                            @if($message = Session::get('wrong'))
-                                <div class="alert alert-danger alert-dismissible" role="alert" style="margin-top: 2rem; margin-bottom: -2rem; font-size: 1.5rem">
-                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                  </button>
-                                  <strong>Fail!</strong> <?php echo $message;?>
-                                </div>
-                            @endif
-
-                            <form id="verificator" class="m-login__form m-form" action="#" method="POST">
-                                @csrf
-                                <div class="form-group m-form__group">
-                                    <input class="form-control m-input" id="registration_code" type="text" placeholder="CODE" name="registration_code" required autofocus >
-                                </div>
-                                <div class="m-login__form-action">
-                                    <button type ="submit" id="submit-btn" class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air" style="font-weight: 400">
-                                        SUBMIT
-                                    </button>
-                                </div>
-                            </form>
-
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div class="container-scroller">
           <div class="container-fluid page-body-wrapper full-page-wrapper">
             <div class="content-wrapper d-flex align-items-center text-center error-page bg-info">
@@ -135,25 +69,47 @@
                       <!-- <h3 class="font-weight-light">Internal server error!</h3> -->
                     </div>
                   </div>
-                    <div class="row mt-5">
-                        <div class="col-lg-8 mx-auto text-white">
-                            <div class="form-group">
-                              <input type="text" class="form-control form-control-lg" placeholder="Code" name="registration_code" aria-label="Username">
+
+                   @if($message = Session::get('success'))
+                        <div class="alert alert-success alert-dismissible col-lg-8 mx-auto" role="alert" style="margin-top: 1 rem; margin-bottom: -2rem; font-size: 1.5rem">
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                          </button>
+                          <strong>Success!</strong> <?php echo $message;?>
+                        </div>
+                    @endif
+                    @if($message = Session::get('fail'))
+                        <div class="alert alert-danger alert-dismissible col-lg-8 mx-auto" role="alert" style="margin-top: 1rem; margin-bottom: -2rem; font-size: 1.5rem">
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                          </button>
+                          <strong>Fail!</strong> <?php echo $message;?>
+                        </div>
+                    @endif
+
+                    <form id="verificator" class="m-login__form m-form" action="{{ route('verify') }}" method="POST">
+                        @csrf
+                        <div class="row mt-5">
+                            <div class="col-lg-8 mx-auto text-white">
+                                <div class="form-group">
+                                  <input type="text" class="form-control form-control-lg" placeholder="Code" name="qr_code" autofocus >
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-lg-3 mx-auto text-white">
-                          <div class="text-center">
-                            <button type="submit" class="btn btn-lg btn-primary btn-block enter-btn">SUBMIT</button>
-                          </div>
+                        <div class="row mt-3">
+                            <div class="col-lg-3 mx-auto text-white">
+                              <div class="text-center">
+                                <button type="submit" class="btn btn-lg btn-primary btn-block enter-btn">SUBMIT</button>
+                              </div>
+                            </div>
                         </div>
-                    </div>
-                  <!-- <div class="row mt-5">
-                    <div class="col-12 mt-xl-2">
-                      <p class="text-white font-weight-medium text-center">Copyright &copy; 2020 All rights reserved.</p>
-                    </div>
-                  </div> -->
+                    </form>
+
+                    <footer class="footer">
+                        <div class="d-sm-flex justify-content-center">
+                          <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © Cultivate Hub {{ date('Y') }}</span>
+                        </div>
+                    </footer>
                 </div>
               </div>
             </div>
@@ -163,7 +119,6 @@
         </div>
         <!-- end:: Page -->
     </body>
-    @include('footer')
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.5/datatables.min.css"/>

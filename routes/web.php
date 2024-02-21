@@ -34,7 +34,10 @@ Route::prefix('tracker')->group(function () {
 
 Auth::routes();
 
-Route::get('/verificator', [App\Http\Controllers\VerificatorController::class, 'index'])->name('verificator');
+Route::prefix('verificator')->group(function () {
+    Route::get('/', [App\Http\Controllers\VerificatorController::class, 'index'])->name('verificator');
+    Route::post('/verify', [App\Http\Controllers\VerificatorController::class, 'scan'])->name('verify');
+});
 
 Route::prefix('admin')->group(function () {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
