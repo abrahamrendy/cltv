@@ -55,6 +55,8 @@ class UserController extends Controller
             $user = Auth::user();
             session()->flush();
             Auth::login($user);
+        } else {
+            session()->flush();
         }
         return redirect('tracker/')->with('success','Logged out!');
     }

@@ -35,6 +35,7 @@ class IndexController extends Controller
     public function tracker()
     {
         if (session('currUser')) {
+            // dd(session('currUser'));
             return redirect('tracker/dashboard');
         } else {
             return view('tracker-login');
