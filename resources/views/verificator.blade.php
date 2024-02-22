@@ -73,9 +73,8 @@
                         <h2>{{$material}}</h2>
                     </div>
                   </div>
-                  <div class="mt-4"></div>
                    @if($message = Session::get('success'))
-                        <div class="alert alert-success alert-dismissible col-lg-8 mx-auto" role="alert" style="margin-top: 1 rem; margin-bottom: -2rem; font-size: 1.2rem">
+                        <div class="alert alert-success alert-dismissible col-lg-8 mx-auto" role="alert" style="margin-top: 1 rem; font-size: 1.2rem">
                           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">×</span>
                           </button>
@@ -83,7 +82,7 @@
                         </div>
                     @endif
                     @if($message = Session::get('fail'))
-                        <div class="alert alert-danger alert-dismissible col-lg-8 mx-auto" role="alert" style="margin-top: 1rem; margin-bottom: -2rem; font-size: 1.2rem">
+                        <div class="alert alert-danger alert-dismissible col-lg-8 mx-auto" role="alert" style="margin-top: 1rem; font-size: 1.2rem">
                           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">×</span>
                           </button>
@@ -93,7 +92,7 @@
 
                     <form id="verificator" class="m-login__form m-form" action="{{ route('verify') }}" method="POST">
                         @csrf
-                        <div class="row mt-5">
+                        <div class="row mt-3">
                             <div class="col-lg-8 mx-auto text-white">
                                 <div class="form-group">
                                   <input type="text" class="form-control form-control-lg" placeholder="Code" name="qr_code" autofocus >
