@@ -27,6 +27,8 @@ Route::post('/submit', [App\Http\Controllers\IndexController::class, 'submit'])-
 Route::prefix('tracker')->group(function () {
     Route::get('/', [App\Http\Controllers\IndexController::class, 'tracker'])->name('tracker');
     Route::get('/dashboard', [App\Http\Controllers\UserController::class, 'dashboard'])->name('tracker_dashboard')->middleware('checkuserlogin');
+    Route::get('/settings', [App\Http\Controllers\UserController::class, 'settings'])->name('tracker_settings')->middleware('checkuserlogin');
+    Route::post('/settings/edit', [App\Http\Controllers\UserController::class, 'edit'])->name('tracker_settings_submit')->middleware('checkuserlogin');
     Route::post('/login', [App\Http\Controllers\UserController::class, 'login'])->name('login_user')->middleware('checkuserlogin');
     Route::get('/logout', [App\Http\Controllers\UserController::class, 'logout'])->name('logout_user');
     Route::post('/submit_edit', [App\Http\Controllers\UserController::class, 'edit'])->name('submit_edit');

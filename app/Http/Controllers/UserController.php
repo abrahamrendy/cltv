@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use DNS2D;
 use Storage;
 use Auth;
+use Hash;
 
 class UserController extends Controller
 {
@@ -61,39 +62,51 @@ class UserController extends Controller
         return redirect('tracker/')->with('success','Logged out!');
     }
 
+    public function settings()
+    {
+        $qr_code = session('user');
+        $currUser = session('currUser');
+        return view('tracker-settings', ['header'=> "Settings", 'currUser' => $currUser]);
+    }
+
     public function edit(Request $request) {
-        // $ibadah = $request->input('ibadah');
-        // $id = $request->input('user_id');
-        // $flag = false;
+        $email = $request->input('email');
+        $no_hp = $request->input('no_hp');
+        $new_password = $request->input('new_password');
+        $confirm_new_password = $request->input('confirm_new_password');
+        $currUser = session('currUser');
+        $updated_at = date('Y-m-d H:i:s' , strtotime('now + 7 hours'));
 
-        // for ($i=0; $i < count($id); $i++) {
-        //     $tempId = $id[$i];
-        //     $tempIbadah = $ibadah[$i];
-        //     $existedUser = DB::table('registrant')->where('id', $tempId)->first();
+        $existedUser = DB::table('registrant')->where('qr_code', $currUser->qr_code)->first();
 
-        //     if (!empty($existedUser)) {
-        //        if ($existedUser->ibadah != $tempIbadah) {
-        //             $existedIbadah = DB::table('ibadah')->where('id', $tempIbadah)->first();
-        //             $countUser = DB::table('registrant')->where('ibadah',$tempIbadah)->count();
-                    
-        //             if ($countUser >= ($existedIbadah->qty)) {
-        //                 // FULL CAPACITY
-        //                 $flag = true;
-        //             } else {
-        //                 DB::table('registrant')->where('id',$tempId)->update(
-        //                                                                     [
-        //                                                                      'ibadah' => $tempIbadah
-        //                                                                     ]);
-        //             }
-
-        //        }
-        //     }
-        // }
-        // if ($flag) {
-        //     return redirect('user/')->with('fail','Anda melebihi kuota ibadah yang ditetapkan. Mohon memilih ibadah lain.');
-        // } else {
-        //     return redirect('user/')->with('success','Berhasil melakukan edit ibadah!');
-        // }
+        if ($new_password == $confirm_new_password) {
+            if($new_password != '' || $confirm_new_password != '') {
+                // CHANGE PASSWORD
+                if (!empty($existedUser)) { 
+                    DB::table('registrant')->where('id',$existedUser->id)->update(
+                                                                        [
+                                                                            'email' => $email,
+                                                                            'no_hp' => $no_hp,
+                                                                            'password' => Hash::make($confirm_new_password),
+                                                                            'updated_at' => $updated_at
+                                                                        ]);
+                    $updatedUser = DB::table('registrant')->where('qr_code', $currUser->qr_code)->first();
+                    $request->session()->put('currUser',$updatedUser);
+                }
+            } else {
+                DB::table('registrant')->where('id',$existedUser->id)->update(
+                                                                                [
+                                                                                 'email' => $email,
+                                                                                 'no_hp' => $no_hp,
+                                                                                 'updated_at' => $updated_at
+                                                                                ]);
+                $updatedUser = DB::table('registrant')->where('qr_code', $currUser->qr_code)->first();
+                $request->session()->put('currUser',$updatedUser);
+            }
+            return redirect('tracker/settings/');
+        } else {
+            return redirect('tracker/settings/')->with('fail','Password mismatch.');
+        }
     }
 
 }
