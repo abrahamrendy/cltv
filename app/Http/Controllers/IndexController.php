@@ -29,7 +29,7 @@ class IndexController extends Controller
         // $ibadah_asal = DB::table('ibadah_asal')->get();
         // $ibadah = DB::table('ibadah')->get();
         // $ibadah = DB::select('SELECT id, nama, qty, IFNULL(t.ct, 0) as ct FROM ibadah LEFT OUTER JOIN (SELECT ibadah, count(id) as ct FROM `registrant` GROUP BY ibadah) as t ON ibadah.id = t.ibadah WHERE ibadah.status = 1 ORDER BY nama');
-        return view('index');
+        return view('index', ['header' => "Home"]);
     }
 
     public function tracker()
@@ -38,7 +38,7 @@ class IndexController extends Controller
             // dd(session('currUser'));
             return redirect('tracker/dashboard');
         } else {
-            return view('tracker-login');
+            return view('tracker-login', ['header' => "Tracker"]);
         }
     }
 

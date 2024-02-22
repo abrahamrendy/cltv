@@ -7,7 +7,15 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Cultivate Hub</title>
+    <?php
+        if (isset($header)) {
+    ?>
+        <title> Cultivate Hub | {{ $header }} </title>
+    <?php
+        } else {
+    ?>
+        <title> Cultivate Hub </title>
+    <?php } ?>
 
     <!-- Scripts -->
     <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
@@ -59,7 +67,7 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="{{asset('images/favicon.png')}}" />
+    <link rel="shortcut icon" href="{{asset('images/Logo Gold Blank.png')}}" />
 
     <style type="text/css">
         body, .form-control {

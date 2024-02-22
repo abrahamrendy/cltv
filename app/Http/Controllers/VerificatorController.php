@@ -26,7 +26,7 @@ class VerificatorController extends Controller
      */
     public function index()
     {
-        return view('verificator');
+        return view('verificator', ['header' => "Verificator"]);
     }
 
     public function scan (Request $request) {

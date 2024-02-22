@@ -65,8 +65,10 @@
                 <div class="col-lg-7 mx-auto text-white">
                   <div class="row align-items-center d-flex flex-row">
                     <div class="col-lg-12 error-page-divider text-lg-center pl-lg-4">
-                      <h2>VERIFICATOR</h2>
-                      <!-- <h3 class="font-weight-light">Internal server error!</h3> -->
+                        <img src="{{asset('images/logo/Logo White Gold.png')}}" alt="logo" width="15%"/>
+                        <div class="col-lg-12 mt-3">
+                            <img src="{{asset('images/logo/VerificatorG.png')}}" alt="logo" width="100%"/>
+                        </div>
                     </div>
                   </div>
 

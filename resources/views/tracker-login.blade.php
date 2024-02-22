@@ -58,7 +58,7 @@
             <div class="row w-100 m-0">
               <div class="content-wrapper full-page-wrapper d-flex align-items-center auth">
                 <div class="card col-lg-4 mx-auto">
-                  <div class="card-body px-5 py-5">
+                  <div class="card-body px-4 py-4">
                     @if($message = Session::get('success'))
                             <div class="alert alert-success alert-dismissible" role="alert">
                               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -76,8 +76,11 @@
                               <strong>Sorry.</strong> {{ $message }}
                             </div>
                         @endif
-                    <h2 class="card-title text-left mb-3">Cultivate Tracker</h2>
-                    <h3 class="card-title text-left mb-3">Login</h3>
+                    <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center">
+                        <a class="sidebar-brand brand-logo mb-1" href="{{route('tracker')}}"><img src="{{asset('images/logo/Logo White Gold.png')}}" alt="logo" /></a>
+                    </div>
+                    <!-- <h2 class="card-title text-left mb-3">Cultivate Tracker</h2> -->
+                    <h3 class="card-title text-center mb-3">Login</h3>
                     <form action="{{ route('login_user') }}" method="POST">
                         @csrf
                       <div class="form-group">

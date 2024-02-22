@@ -41,7 +41,7 @@ class UserController extends Controller
             $attendance[$i] = $temp->cm_id;
             $i++;
         }
-        return view('tracker-dashboard', ['attendance'=>$attendance, 'currUser' => $currUser, 'materials' => $materials]);
+        return view('tracker-dashboard', ['header'=> "Dashboard", 'attendance'=>$attendance, 'currUser' => $currUser, 'materials' => $materials]);
     }
 
     public function login(Request $request)
