@@ -18,6 +18,13 @@
           background-color: #666B7A;
           outline: 1px solid #666B7A;
         }
+
+        @media (max-width: 768px) {
+          .stretch-card {
+            height: 370px;
+            overflow: auto;
+          }
+        }
     </style> 
     
     <div class="container-scroller">
@@ -48,7 +55,7 @@
                 </div>
               </div>
               <div class="col-md-8 grid-margin stretch-card">
-              <div class="col-12">
+              <!-- <div class="col-12"> -->
                 <div class="card">
                   <div class="card-body">
                     <h4 class="card-title">Attendance Status</h4>
@@ -98,7 +105,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              <!-- </div> -->
             </div>
             </div>
 
