@@ -76,8 +76,8 @@
                               <strong>Sorry.</strong> {{ $message }}
                             </div>
                         @endif
-                    <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center">
-                        <a class="sidebar-brand brand-logo mb-1" href="{{route('tracker')}}"><img src="{{asset('images/logo/Logo White Gold.png')}}" alt="logo" /></a>
+                    <div class="sidebar-brand-wrapper brand-logo d-lg-flex align-items-center justify-content-center text-center mb-1">
+                        <a class="sidebar-brand mx-auto" href="{{route('tracker')}}"><img src="{{asset('images/logo/Logo White Gold.png')}}" alt="logo" /></a>
                     </div>
                     <!-- <h2 class="card-title text-left mb-3">Cultivate Tracker</h2> -->
                     <h3 class="card-title text-center mb-3">Login</h3>
