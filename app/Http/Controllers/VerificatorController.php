@@ -27,11 +27,9 @@ class VerificatorController extends Controller
     public function index()
     {
         $getActiveClassesMaterials = DB::table('classes_materials')->where('active_now',1)->first();
-
-        $getClassName = DB::table('classes')->where('id',$getActiveClassesMaterials->classes_id)->first();
         $getMaterialName = DB::table('materials')->where('id',$getActiveClassesMaterials->materials_id)->first();
 
-        return view('verificator', ['header' => "Verificator", 'class' => $getClassName->name, 'material' => $getMaterialName->name]);
+        return view('verificator', ['header' => "Verificator", 'material' => $getMaterialName->name]);
     }
 
     public function scan (Request $request) {

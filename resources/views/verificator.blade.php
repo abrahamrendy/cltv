@@ -70,7 +70,7 @@
                         <div class="col-lg-12 mt-3">
                             <img src="{{asset('images/logo/VerificatorG.png')}}" alt="logo" width="93%"/>
                         </div>
-                        <h2>{{$class}}: {{$material}}</h2>
+                        <h2>{{$material}}</h2>
                     </div>
                   </div>
                   <div class="mt-4"></div>
