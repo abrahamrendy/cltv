@@ -55,7 +55,7 @@
                 </div>
               </div>
               <div class="col-md-8 grid-margin stretch-card">
-              <!-- <div class="col-12"> -->
+              <div class="col-12 p-0">
                 <div class="card">
                   <div class="card-body">
                     <h4 class="card-title">Attendance Status</h4>
@@ -105,7 +105,7 @@
                     </div>
                   </div>
                 </div>
-              <!-- </div> -->
+              </div>
             </div>
             </div>
 
