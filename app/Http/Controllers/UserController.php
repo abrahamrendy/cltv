@@ -103,7 +103,7 @@ class UserController extends Controller
                 $updatedUser = DB::table('registrant')->where('qr_code', $currUser->qr_code)->first();
                 $request->session()->put('currUser',$updatedUser);
             }
-            return redirect('tracker/settings/');
+            return redirect('tracker/settings/')->with('success','All changes have been made!');
         } else {
             return redirect('tracker/settings/')->with('fail','Password mismatch.');
         }

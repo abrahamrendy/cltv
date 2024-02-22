@@ -35,6 +35,22 @@
                     <h4 class="card-title">Member Details</h4>
                     <div class="bg-gray-dark d-flex d-md-block d-xl-flex flex-row py-3 px-4 px-md-3 px-xl-4 rounded mt-3">
                       <div class="text-md-center text-xl-left col-lg-12">
+                        @if($message = Session::get('success'))
+                        <div class="alert alert-success alert-dismissible mx-auto" role="alert">
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                          </button>
+                          <strong>Success!</strong> <?php echo $message;?>
+                        </div>
+                        @endif
+                        @if($message = Session::get('fail'))
+                        <div class="alert alert-danger alert-dismissible mx-auto" role="alert">
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                          </button>
+                          <strong>Fail!</strong> <?php echo $message;?>
+                        </div>
+                        @endif
                         <form class="forms-sample" method="POST" action="{{ route('tracker_settings_submit') }}">
                           @csrf
                           <div class="row">
