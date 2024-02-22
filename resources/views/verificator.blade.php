@@ -3,6 +3,7 @@
     <body class="m--skin- m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default"  style="background-color: #004C2E;">
         <!-- begin:: Page -->
         <style type="text/css">
+
             .left-side-bg {
                  background-position: center; 
                  background-size: 80%; 
@@ -65,15 +66,16 @@
                 <div class="col-lg-7 mx-auto text-white">
                   <div class="row align-items-center d-flex flex-row">
                     <div class="col-lg-12 error-page-divider text-lg-center pl-lg-4">
-                        <img src="{{asset('images/logo/Logo White Gold.png')}}" alt="logo" width="15%"/>
+                        <img src="{{asset('images/logo/Logo White Gold.png')}}" alt="logo" width="12%"/>
                         <div class="col-lg-12 mt-3">
-                            <img src="{{asset('images/logo/VerificatorG.png')}}" alt="logo" width="100%"/>
+                            <img src="{{asset('images/logo/VerificatorG.png')}}" alt="logo" width="93%"/>
                         </div>
+                        <h2>{{$class}}: {{$material}}</h2>
                     </div>
                   </div>
-
+                  <div class="mt-4"></div>
                    @if($message = Session::get('success'))
-                        <div class="alert alert-success alert-dismissible col-lg-8 mx-auto" role="alert" style="margin-top: 1 rem; margin-bottom: -2rem; font-size: 1.5rem">
+                        <div class="alert alert-success alert-dismissible col-lg-8 mx-auto" role="alert" style="margin-top: 1 rem; margin-bottom: -2rem; font-size: 1.2rem">
                           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">×</span>
                           </button>
@@ -81,7 +83,7 @@
                         </div>
                     @endif
                     @if($message = Session::get('fail'))
-                        <div class="alert alert-danger alert-dismissible col-lg-8 mx-auto" role="alert" style="margin-top: 1rem; margin-bottom: -2rem; font-size: 1.5rem">
+                        <div class="alert alert-danger alert-dismissible col-lg-8 mx-auto" role="alert" style="margin-top: 1rem; margin-bottom: -2rem; font-size: 1.2rem">
                           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">×</span>
                           </button>
