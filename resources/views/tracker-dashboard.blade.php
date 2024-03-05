@@ -19,6 +19,10 @@
           outline: 1px solid #666B7A;
         }
 
+        .table td {
+          white-space: initial;
+        }
+
         @media (max-width: 768px) {
           .stretch-card {
             height: 370px;
@@ -80,7 +84,7 @@
                                     <tr>
                                         <td> {{$ct}} </td>
                                         <td> {{$material->m_name}} </td>
-                                        <td> {{date("d M Y", strtotime ($material->cm_date))}} </td>
+                                        <td> {{date("d-m-Y", strtotime ($material->cm_date))}} </td>
                                         <td>
                                             <?php
                                                 if (in_array($material->cm_id, $attendance)) {
