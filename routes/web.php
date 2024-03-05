@@ -29,6 +29,25 @@ Route::prefix('tracker')->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\UserController::class, 'dashboard'])->name('tracker_dashboard')->middleware('checkuserlogin');
     Route::get('/settings', [App\Http\Controllers\UserController::class, 'settings'])->name('tracker_settings')->middleware('checkuserlogin');
     Route::post('/settings/edit', [App\Http\Controllers\UserController::class, 'edit'])->name('tracker_settings_submit')->middleware('checkuserlogin');
+    // Download Route
+    Route::get('/download/{filename}', function($filename)
+    {
+        // Check if file exists in app/storage/file folder
+        $file_path = public_path() .'/storage/'. $filename;
+        if (file_exists($file_path))
+        {
+            // Send Download
+            return Response::download($file_path, $filename, [
+                'Content-Length: '. filesize($file_path)
+            ]);
+        }
+        else
+        {
+            // Error
+            // dd($file_path);
+            return abort(500, 'Requested file does not exist on our server!');
+        }
+    })->name('resource_download')->middleware('checkuserlogin');;
     Route::post('/login', [App\Http\Controllers\UserController::class, 'login'])->name('login_user')->middleware('checkuserlogin');
     Route::get('/logout', [App\Http\Controllers\UserController::class, 'logout'])->name('logout_user');
     Route::post('/submit_edit', [App\Http\Controllers\UserController::class, 'edit'])->name('submit_edit');

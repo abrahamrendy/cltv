@@ -12,11 +12,12 @@
                 <div class="col-lg-6 error-page-divider text-lg-left pl-lg-4">
                   <h2>SORRY!</h2>
                   <h3 class="font-weight-light">Internal server error!</h3>
+                  <h3 class="font-weight-light">{{ $exception->getMessage() }}</h3>
                 </div>
               </div>
               <div class="row mt-5">
                 <div class="col-12 text-center mt-xl-2">
-                  <a class="text-white font-weight-medium" href="{{route('tracker')}}">Back to home</a>
+                  <a class="text-white font-weight-medium" href="{{route('tracker')}}">Back to <b>TRACKER</b></a>
                 </div>
               </div>
               <div class="row mt-5">

@@ -8,6 +8,7 @@ use DNS2D;
 use Storage;
 use Auth;
 use Hash;
+use Response;
 
 class UserController extends Controller
 {
@@ -32,7 +33,7 @@ class UserController extends Controller
         // $user = DB::table('registrant')->where('qr_code', session('user'))->get();
         $currUser = session('currUser');
 
-        $materials = DB::select('SELECT classes_materials.id as cm_id, classes_materials.class_date as cm_date, classes.name as c_name, classes.batch as c_batch, classes.date as c_date, materials.name as m_name FROM `classes_materials` INNER JOIN classes on classes_id = classes.id INNER JOIN materials on materials_id = materials.id WHERE classes.active = 1 ORDER BY cm_id');
+        $materials = DB::select('SELECT classes_materials.id as cm_id, classes_materials.resource as cm_resource, classes_materials.class_date as cm_date, classes.name as c_name, classes.batch as c_batch, classes.date as c_date, materials.name as m_name FROM `classes_materials` INNER JOIN classes on classes_id = classes.id INNER JOIN materials on materials_id = materials.id WHERE classes.active = 1 ORDER BY cm_id');
 
         $data = DB::select('SELECT t.cm_id FROM (SELECT classes_materials.id as cm_id, classes.name as c_name, classes.batch as c_batch, materials.name as m_name FROM `classes_materials` INNER JOIN classes on classes_id = classes.id INNER JOIN materials on materials_id = materials.id) as t INNER JOIN attendances ON t.cm_id = classes_materials_id INNER JOIN registrant on participants_id = registrant.id where qr_code = ?',[$qr_code]);
 
@@ -68,6 +69,17 @@ class UserController extends Controller
         $currUser = session('currUser');
         return view('tracker-settings', ['header'=> "Settings", 'currUser' => $currUser]);
     }
+
+    public function download()
+    {
+        $file= public_path('storage')."/"."test.pdf";
+
+        $headers = array(
+                  'Content-Type: application/pdf',
+                );
+        // dd($file);
+        return Response::download($file, $headers);
+    } 
 
     public function edit(Request $request) {
         $email = $request->input('email');

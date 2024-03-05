@@ -67,6 +67,7 @@
                             <th> Class Name </th>
                             <th> Start Date </th>
                             <th> Status </th>
+                            <th> Resources </th>
                           </tr>
                         </thead>
                         <tbody>
@@ -95,6 +96,30 @@
                                                 }
                                             ?>
                                         </td>
+                                        <td>
+                                          <?php
+                                                if (in_array($material->cm_id, $attendance)) {
+                                            ?>
+                                                    <div class="text-center ">
+                                                      <!-- <i class="mdi mdi-close-circle"></i> -->
+                                                      <a type="button" href= "{{ route('resource_download', $material->cm_resource)}}" class="btn btn-inverse-success btn-icon" style="height: auto; width: auto; padding: 0.35rem 0.7rem">
+                                                          <i class="mdi mdi-file-powerpoint m-0"></i>
+                                                      </a>
+                                                    </div>
+                                            <?php
+                                                } else {
+                                            ?>
+                                                    <!-- <div class="badge badge-outline-warning" style="width: 85px">Unattended</div> -->
+                                                    <div class="text-center ">
+                                                      <!-- <i class="mdi mdi-close-circle"></i> -->
+                                                      <div class="btn btn-inverse-danger btn-icon" style="height: auto; width: auto; padding: 0.35rem 0.7rem; cursor: not-allowed;">
+                                                          <i class="mdi mdi-file-powerpoint m-0"></i>
+                                                      </div>
+                                                    </div>
+                                            <?php
+                                                }
+                                            ?>
+                                        </td>
                                     </tr>
                             <?php 
                                     $ct++; 
@@ -108,6 +133,7 @@
               </div>
             </div>
             </div>
+
 
             <!-- <div class="row">
               <div class="col-sm-4 grid-margin">
