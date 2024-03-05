@@ -84,7 +84,7 @@
                                     <tr>
                                         <td> {{$ct}} </td>
                                         <td> {{$material->m_name}} </td>
-                                        <td> {{date("d-m-Y", strtotime ($material->cm_date))}} </td>
+                                        <td style="width: 110px;"> {{date("d M Y", strtotime ($material->cm_date))}} </td>
                                         <td>
                                             <?php
                                                 if (in_array($material->cm_id, $attendance)) {
