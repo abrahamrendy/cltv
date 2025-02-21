@@ -23,7 +23,7 @@
             }
 
             .bg-info, footer {
-                background-color: #004C2E !important;
+                background-color: #D6B261 !important;
             }
 
             .text-muted {
@@ -35,8 +35,8 @@
             }
 
             .btn-primary {
-                background-color: #D6B261 !important;
-                border-color: #D6B261 !important;
+                background-color: #004C2E !important;
+                border-color: #004C2E !important;
             }
 
             @media (max-width: 768px) {
@@ -66,9 +66,9 @@
                 <div class="col-lg-7 mx-auto text-white">
                   <div class="row align-items-center d-flex flex-row">
                     <div class="col-lg-12 error-page-divider text-lg-center pl-lg-4">
-                        <img src="{{asset('images/logo/Logo White Gold.png')}}" alt="logo" width="12%"/>
+                        <img src="{{asset('images/logo/Logo Green.png')}}" alt="logo" width="15%"/>
                         <div class="col-lg-12 mt-3">
-                            <img src="{{asset('images/logo/VerificatorG.png')}}" alt="logo" width="93%"/>
+                            <img src="{{asset('images/logo/Verificator Basic Preacher copy.png')}}" alt="logo" width="93%"/>
                         </div>
                         <h2>{{$material}}</h2>
                     </div>
@@ -95,7 +95,7 @@
                         <div class="row mt-3">
                             <div class="col-lg-8 mx-auto text-white">
                                 <div class="form-group">
-                                  <input type="text" class="form-control form-control-lg" placeholder="Code" name="qr_code" autofocus >
+                                  <input type="text" class="form-control form-control-lg" placeholder="Code" name="qr_code" autofocus style="border:none">
                                 </div>
                             </div>
                         </div>

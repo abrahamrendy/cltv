@@ -29,6 +29,22 @@
         <span class="menu-title">Dashboard</span>
       </a>
     </li>
+    <li class="nav-item menu-items">
+      <a class="nav-link" href="{{route('basic-doctrine')}}">
+        <span class="menu-icon">
+          <i class="mdi mdi-book-open-variant"></i>
+        </span>
+        <span class="menu-title">Basic Doctrine</span>
+      </a>
+    </li>
+     <li class="nav-item menu-items">
+      <a class="nav-link" href="{{route('basic-preaching')}}">
+        <span class="menu-icon">
+          <i class="mdi mdi-account-tie"></i>
+        </span>
+        <span class="menu-title">Basic Preaching</span>
+      </a>
+    </li>
     <!-- <li class="nav-item menu-items">
       <a class="nav-link" href="#">
         <span class="menu-icon">

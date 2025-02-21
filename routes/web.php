@@ -27,6 +27,9 @@ Route::post('/submit', [App\Http\Controllers\IndexController::class, 'submit'])-
 Route::prefix('tracker')->group(function () {
     Route::get('/', [App\Http\Controllers\IndexController::class, 'tracker'])->name('tracker');
     Route::get('/dashboard', [App\Http\Controllers\UserController::class, 'dashboard'])->name('tracker_dashboard')->middleware('checkuserlogin');
+    Route::get('/join-class/{id}', [App\Http\Controllers\UserController::class, 'joinClass'])->name('join-class')->middleware('checkuserlogin');
+    Route::get('/basic-doctrine', [App\Http\Controllers\UserController::class, 'basicDoctrine'])->name('basic-doctrine')->middleware('checkuserlogin');
+    Route::get('/basic-preaching', [App\Http\Controllers\UserController::class, 'basicPreaching'])->name('basic-preaching')->middleware('checkuserlogin');
     Route::get('/settings', [App\Http\Controllers\UserController::class, 'settings'])->name('tracker_settings')->middleware('checkuserlogin');
     Route::post('/settings/edit', [App\Http\Controllers\UserController::class, 'edit'])->name('tracker_settings_submit')->middleware('checkuserlogin');
     // Download Route

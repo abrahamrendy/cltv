@@ -1,56 +1,6 @@
         @include('header')
     <body>
     <style type="text/css">
-        a {
-          color: white;
-        }
-
-        a:hover {
-          color: white;
-          text-decoration: none;
-        }
-
-        .grow {
-          transition: all 0.3s ease-in-out;
-        }
-
-        .grow:hover {
-          transform: scale(1.05);
-        }
-
-        .button-bordered {
-          border: none;
-          outline: none;
-          position: relative;
-        }
-
-        .button-bordered::before,
-        .button-bordered::after {
-          border: 0 solid transparent;
-          transition: all 0.3s;
-          content: '';
-          height: 0;
-          position: absolute;
-          width: 24px;
-        }
-
-        .button-bordered::before {
-          border-top: 4px solid white;
-          right: 0;
-          top: -4px;
-        }
-
-        .button-bordered::after {
-          border-bottom: 4px solid white;
-          bottom: -4px;
-          left: 0;
-        }
-
-        .button-bordered:hover::before,
-        .button-bordered:hover::after {
-          width: 100%;
-        }
-
         .stretch-card {
             height: 500px;
             overflow: auto;
@@ -87,38 +37,13 @@
         <!-- partial -->
         <div class="main-panel">
           <div class="content-wrapper">
+            <div class="page-header">
+              <h3 class="page-title"> {{ $header }} </h3>
+            </div>
+
             <?php
-              if (!isset($materials)) {
+              if (isset($materials)) {
             ?>
-            <div class="page-header">
-              <h3 class="page-title"><span style="font-weight:100">Active Class:</span> <span style="font-style: italic;">{{$activeClass->name}} <span class="text-danger">(Not Enrolled)</span></span></h3>
-            </div>
-            <div class="row">
-              <div class="col-sm-4 grid-margin">
-                <a href="{{route('join-class', $activeClass->id)}}">
-                  <div class="card button-bordered grow">
-                    <div class="card-body">
-                      <div class="row">
-                        <div class="col-8 col-sm-12 col-xl-8 my-auto">
-                          <div class="d-flex d-sm-block d-md-flex align-items-center">
-                            <h2 class="mb-0">ENROLL NOW</h2>
-                          </div>
-                        </div>
-                        <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
-                          <i class="icon-lg mdi mdi-account-plus text-success ml-auto"></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <?php } else {?>
-
-            <div class="page-header">
-              <h3 class="page-title"><span style="font-weight:100">Active Class:</span> <span style="font-style: italic;">{{$materials[0]->c_name}}</span></h3>
-            </div>
-
             <div class="row">
               <div class="col-md-4 grid-margin stretch-card">
                 <div class="card">
@@ -215,9 +140,33 @@
                 </div>
               </div>
             </div>
-            </div>
+            <?php } else { ?>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="card button-bordered grow">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                        <div class="d-flex d-sm-block d-md-flex align-items-center">
+                          <h2 class="mb-0 text-danger">Not Enrolled</h2>
+                        </div>
+                      </div>
+                      <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                        <i class="icon-lg mdi mdi-bookmark-remove text-danger ml-auto"></i>
+                      </div>
+                    </div>
 
-          <?php } ?>
+                    <div class="media">
+                      <div class="media-body">
+                        <p class="card-text lead">You haven't enrolled in this class yet. Please join us in the next batch!</p>
+                        <h4 class="card-text">See you there!</h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <?php } ?>
+            </div>
 
 
             <!-- <div class="row">

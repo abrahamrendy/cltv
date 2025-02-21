@@ -25,11 +25,13 @@ class CheckUserLogin
             $password = $request->password;
 
             $getUser = DB::table('registrant')->whereRaw("UPPER(qr_code) = '" . strtoupper($qr_code) . "'")->first();
+            $activeClass = DB::table('classes')->where('active',1)->first();
 
             if (!empty($getUser)) {
                 if (Hash::check($password, $getUser->password)){
                     $request->session()->put('currUser',$getUser);
                     $request->session()->put('user',$qr_code);
+                    $request->session()->put('activeClass', $activeClass);
                     return $next($request);
                 } else {
                     return redirect('/tracker')->with('fail','Wrong password.');
